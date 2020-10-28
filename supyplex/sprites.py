@@ -6,6 +6,11 @@ from supyplex.commons import *
 
 
 class SpriteStatus(object):
+    """
+    Sprite Status model the status of the sprite and also
+    the list of frames that the status contains.
+    """
+
     def __init__(self, action, frame_rect):
         self.action = action
         self.frame_rect = frame_rect
@@ -20,10 +25,14 @@ class SpriteStatus(object):
 
 
 class GenericSprite(pygame.sprite.Sprite):
+    """
+    This class model a Supaplex animated sprites the update
+    function is common to each types of animated sprites
+    what change is the status list
+    """
 
     def __init__(self, screen: pygame.Surface, image: pygame.Surface, level: GameLogic):
         super().__init__()
-
         self.screen = screen
         self.image = image
         self.level = level
@@ -36,12 +45,12 @@ class GenericSprite(pygame.sprite.Sprite):
         self.speed = 4
 
     def apply_status(self, status: str):
+        # TODO it seems that the best data structure for this current_status variable would be dictionary instead list
         self.current_status = next(i for i in self.status if i.action == status)
 
     def move_to(self, p: Point, status: str):
 
         self.actions = [self.position.clone(), p]
-
         self.next_position = p
         self.is_moving = True
         self.apply_status(status)
@@ -112,7 +121,7 @@ class Murphy(GenericSprite):
             SpriteStatus(action="move_down", frame_rect=[(i * 32, 11 * 32, 32, 32) for i in range(8, 16)]),
             SpriteStatus(action="move_up", frame_rect=[(i * 32, 11 * 32, 32, 32) for i in range(8, 16)]),
             SpriteStatus(action="idle", frame_rect=[(32 * 3, 0, 32, 32)]),
-            SpriteStatus(action="watch_left", frame_rect=[(6*32, 11 * 32, 32, 32)]),
+            SpriteStatus(action="watch_left", frame_rect=[(6 * 32, 11 * 32, 32, 32)]),
             SpriteStatus(action="watch_right", frame_rect=[(15 * 32, 11 * 32, 32, 32)]),
         ]
         self.current_status = self.status[4]

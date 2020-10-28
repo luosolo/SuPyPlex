@@ -14,21 +14,21 @@ class LevelInfo(object):
 
 
 class LevelLoader(object):
-
-    # The Level Loader class is responsible to reads levels.dat
-    # This is a very simple, uncompressed format where each level is stored sequentially and takes up 1536 bytes each.
-    # The levels.dat distributed with the game is 170496 bytes in size (111 levels).
-    # ---------------------------------------------------------------------
-    # Offset    Length	    Contents	Details
-    # --------------------------------------------------------------------
-    # 0	        1440	    Tile data	    60x24 in size, one byte per tile.
-    # 1440	    4	        Unknown	        Unused
-    # 1444	    1	        Gravity	        0 = off, 1 = on.
-    # 1445	    1	        Unknown	        Used by the SpeedFix-version as a version indicator. In the original version it's always 0x20.
-    # 1446	    23	        Title	        Always 23 characters, no null-termination, normally padded with spaces.
-    # 1469	    1	        Freeze zonks    0 = off, 2 = on.
-    # 1470	    1	        Infotrons       needed	The minimum number of infotrons needed to be able to clear the level. 0 = all of them.
-
+    """
+    The Level Loader class is responsible to reads levels.dat
+    This is a very simple, uncompressed format where each level is stored sequentially and takes up 1536 bytes each.
+    The levels.dat distributed with the game is 170496 bytes in size (111 levels).
+    ---------------------------------------------------------------------
+    Offset    Length	    Contents	Details
+    --------------------------------------------------------------------
+    0	        1440	    Tile data	    60x24 in size, one byte per tile.
+    1440	    4	        Unknown	        Unused
+    1444	    1	        Gravity	        0 = off, 1 = on.
+    1445	    1	        Unknown	        Used by the SpeedFix-version as a version indicator. In the original version it's always 0x20.
+    1446	    23	        Title	        Always 23 characters, no null-termination, normally padded with spaces.
+    1469	    1	        Freeze zonks    0 = off, 2 = on.
+    1470	    1	        Infotrons       needed	The minimum number of infotrons needed to be able to clear the level. 0 = all of them.
+    """
     def __init__(self, base_dir):
         self.levels = None
         self.path = base_dir

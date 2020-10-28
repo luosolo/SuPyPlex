@@ -10,26 +10,25 @@ pygame.init()
 
 class SuPyplex(object):
     def __init__(self, base_dir):
-        self.screen = None
+        self.surface = None
         self.level = None
         self.running = False
         self.levelInfo = None
         self.sprites = None
-        self.player_position = None
         self.window = None
         self.murphy = None
         self.base_dir = base_dir
 
     def setup(self):
         self.window = pygame.display.set_mode([800, 600])
-        self.screen = pygame.Surface((MAX_X, MAX_Y))
+        self.surface = pygame.Surface((MAX_X, MAX_Y))
         self.running = True
         self.level = GameLogic(0, self.base_dir)
         self.sprites = pygame.image.load(path.join(self.base_dir, "resources/Mpx32.bmp"))
-        self.murphy = Murphy(self.screen, self.sprites, self.level)
+        self.murphy = Murphy(self.surface, self.sprites, self.level)
 
     def draw(self):
-        self.screen.fill((0, 0, 0))
+        self.surface.fill((0, 0, 0))
 
         for i in range(24):
             for j in range(60):
@@ -37,8 +36,8 @@ class SuPyplex(object):
                 x_s = current % 16
                 y_s = current // 16
                 if current != 3:
-                    self.screen.blit(self.sprites, (j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE),
-                                     (x_s * CELL_SIZE, y_s * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                    self.surface.blit(self.sprites, (j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE),
+                                      (x_s * CELL_SIZE, y_s * CELL_SIZE, CELL_SIZE, CELL_SIZE))
                 else:
                     if self.murphy.next_position is None:
                         self.murphy.position = Point(j * 32, i * 32)
@@ -103,7 +102,7 @@ class SuPyplex(object):
             self.manage_key()
             self.draw()
 
-            self.window.blit(self.screen, (0, 0), self.get_surface_position())
+            self.window.blit(self.surface, (0, 0), self.get_surface_position())
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
