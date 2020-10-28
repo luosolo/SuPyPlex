@@ -1,4 +1,3 @@
-
 MAX_X = 60 * 32
 MAX_Y = 24 * 32
 CELL_SIZE = 32
@@ -32,6 +31,10 @@ class Point(object):
     def from_map_tuple(self, t):
         self.x = t[1] // 32
         self.y = t[0] // 32
+
+
+def from_map_to_point(x, y):
+    return Point(x * CELL_SIZE, y * CELL_SIZE)
 
 
 POINT_UP = Point(0, -32)

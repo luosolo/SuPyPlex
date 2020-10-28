@@ -30,5 +30,5 @@ python main.py
 # License
 I could not find any license with the original executable prohibiting
 disassembly and modification of the source code. As such I release the
-disassembled source code of the game under the MIT license. If you have
+disassembled source code of the game under the Apache 2 license. If you have
 a problem with this please don't hesitate to contact me.

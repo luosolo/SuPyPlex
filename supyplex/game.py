@@ -23,12 +23,13 @@ class SuPyplex(object):
         self.window = pygame.display.set_mode([800, 600])
         self.surface = pygame.Surface((MAX_X, MAX_Y))
         self.running = True
-        self.level = GameLogic(0, self.base_dir)
+        self.level = GameLogic(5, self.base_dir)
         self.sprites = pygame.image.load(path.join(self.base_dir, "resources/Mpx32.bmp"))
         self.murphy = Murphy(self.surface, self.sprites, self.level)
 
     def draw(self):
         self.surface.fill((0, 0, 0))
+        self.level.calculate_next_move()
 
         for i in range(24):
             for j in range(60):
