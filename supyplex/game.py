@@ -1,16 +1,15 @@
 # Import and initialize the pygame library
 import pygame
-from commons import *
-from sprites import Murphy, Zonk
-from GameLogic import GameLogic
+from supyplex.commons import *
+from supyplex.sprites import Murphy
+from supyplex.GameLogic import GameLogic
+from os import path
 
 pygame.init()
 
 
-
-
-class MainGame(object):
-    def __init__(self):
+class SuPyplex(object):
+    def __init__(self, base_dir):
         self.screen = None
         self.level = None
         self.running = False
@@ -19,13 +18,14 @@ class MainGame(object):
         self.player_position = None
         self.window = None
         self.murphy = None
+        self.base_dir = base_dir
 
     def setup(self):
         self.window = pygame.display.set_mode([800, 600])
         self.screen = pygame.Surface((MAX_X, MAX_Y))
         self.running = True
-        self.level = GameLogic(0)
-        self.sprites = pygame.image.load("assets/Mpx32.bmp")
+        self.level = GameLogic(0, self.base_dir)
+        self.sprites = pygame.image.load(path.join(self.base_dir, "resources/Mpx32.bmp"))
         self.murphy = Murphy(self.screen, self.sprites, self.level)
 
     def draw(self):
@@ -37,7 +37,8 @@ class MainGame(object):
                 x_s = current % 16
                 y_s = current // 16
                 if current != 3:
-                    self.screen.blit(self.sprites, (j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE), (x_s * CELL_SIZE, y_s * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                    self.screen.blit(self.sprites, (j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE),
+                                     (x_s * CELL_SIZE, y_s * CELL_SIZE, CELL_SIZE, CELL_SIZE))
                 else:
                     if self.murphy.next_position is None:
                         self.murphy.position = Point(j * 32, i * 32)
@@ -112,9 +113,3 @@ class MainGame(object):
             # pygame.display.update()
 
         pygame.quit()
-
-
-if __name__ == '__main__':
-    game = MainGame()
-    game.setup()
-    game.main_loop()

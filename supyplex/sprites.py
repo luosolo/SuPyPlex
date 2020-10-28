@@ -1,8 +1,8 @@
 import pygame
 from typing import List
 
-from GameLogic import GameLogic
-from commons import *
+from supyplex.GameLogic import GameLogic
+from supyplex.commons import *
 
 
 class SpriteStatus(object):

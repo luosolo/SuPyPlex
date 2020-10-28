@@ -1,3 +1,6 @@
+from os import path
+
+
 class LevelInfo(object):
 
     def __init__(self, title=None, infotrons=0, gravity=False, map=[]):
@@ -12,11 +15,12 @@ class LevelInfo(object):
 
 class LevelLoader(object):
 
-    def __init__(self):
+    def __init__(self, base_dir):
         self.levels = None
+        self.path = base_dir
 
     def load_level(self, i):
-        self.levels = open("LEVELS.DAT", "rb")
+        self.levels = open(str(path.join(self.path, "resources/LEVELS.DAT")), "rb")
         self.levels.read(i * 1536)
         data_bytes = self.levels.read(1536)
         current_map = []
@@ -32,5 +36,5 @@ class LevelLoader(object):
         info = LevelInfo(map=current_map)
         info.gravity = data_bytes[1444]
         info.title = data_bytes[1446:1446 + 23]
-        info.infotrons= data_bytes[1470]
+        info.infotrons = data_bytes[1470]
         return info

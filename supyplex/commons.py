@@ -1,3 +1,4 @@
+
 MAX_X = 60 * 32
 MAX_Y = 24 * 32
 CELL_SIZE = 32

@@ -1,11 +1,11 @@
-from LevelLoader import LevelLoader
-from commons import Point
+from supyplex.LevelLoader import LevelLoader
+from supyplex.commons import Point
 
 
 class GameLogic(object):
 
-    def __init__(self, level):
-        self.levelInfo = LevelLoader().load_level(level)
+    def __init__(self, level, base_dir):
+        self.levelInfo = LevelLoader(base_dir).load_level(level)
         self.map = self.levelInfo.map
 
     def can_move(self, p: Point):
@@ -13,9 +13,12 @@ class GameLogic(object):
         return val in {0, 2, 4}
 
     def move_complete(self, from_position: Point, to_position: Point):
-        print(f"move complete -> from:{from_position}, end: {to_position}")
         self.map[from_position.y][from_position.x] = 0
         self.map[to_position.y][to_position.x] = 3
+
+    def calculate_zonk_movement(self):
+        pass
+
 
     def calculate_next_move(self):
         pass
