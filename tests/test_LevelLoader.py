@@ -1,5 +1,5 @@
 from unittest import TestCase
-from supyplex.LevelLoader import *
+from supyplex.level import *
 from os import path
 
 ROOT_DIR = path.dirname(path.abspath("."))

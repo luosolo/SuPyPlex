@@ -1,4 +1,4 @@
-from supyplex.LevelLoader import LevelLoader
+from supyplex.level import LevelLoader
 from supyplex.commons import Point
 
 

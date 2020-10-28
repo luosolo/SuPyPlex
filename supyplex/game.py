@@ -2,7 +2,7 @@
 import pygame
 from supyplex.commons import *
 from supyplex.sprites import Murphy
-from supyplex.GameLogic import GameLogic
+from supyplex.game_logic import GameLogic
 from os import path
 
 pygame.init()

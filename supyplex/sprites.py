@@ -1,7 +1,7 @@
 import pygame
 from typing import List
 
-from supyplex.GameLogic import GameLogic
+from supyplex.game_logic import GameLogic
 from supyplex.commons import *
 
 
@@ -34,9 +34,6 @@ class GenericSprite(pygame.sprite.Sprite):
         self.actions = []
         self.is_moving = False
         self.speed = 4
-
-    def calculate_rect(self, status):
-        pass
 
     def apply_status(self, status: str):
         self.current_status = next(i for i in self.status if i.action == status)
